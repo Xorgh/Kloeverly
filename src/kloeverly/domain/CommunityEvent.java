@@ -1,6 +1,6 @@
 package kloeverly.domain;
 
-public class Event
+public class CommunityEvent
 {
 
 }
