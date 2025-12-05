@@ -1,6 +1,8 @@
 package kloeverly.domain;
 
-public class TaskTemplate
+import java.io.Serializable;
+
+public class TaskTemplate implements Serializable
 {
   private String title;
   private String description;

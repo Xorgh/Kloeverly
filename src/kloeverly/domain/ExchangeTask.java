@@ -1,8 +1,9 @@
 package kloeverly.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ExchangeTask extends Task
+public class ExchangeTask extends Task implements Serializable
 {
   private int ID;
   private String title;
@@ -10,8 +11,8 @@ public class ExchangeTask extends Task
   private String description;
   private int pointValue;
   private TaskStatus status;
-  private boolean isAnonymous;
   private LocalDate created;
+  private Resident owner;
   private LocalDate completed;
   private Resident completedBy;
 
@@ -38,5 +39,10 @@ public class ExchangeTask extends Task
 
   public void deleteTask() {
 
+  }
+
+  public Resident getOwner()
+  {
+    return owner;
   }
 }

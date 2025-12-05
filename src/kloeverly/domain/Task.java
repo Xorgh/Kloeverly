@@ -1,8 +1,9 @@
 package kloeverly.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Task
+public abstract class Task implements Serializable
 {
   private static int lastId = 0;
   private int ID;
@@ -23,5 +24,10 @@ public abstract class Task
   public static void setLastId()
   {
     Task.lastId ++;
+  }
+
+  public TaskStatus getStatus()
+  {
+    return status;
   }
 }

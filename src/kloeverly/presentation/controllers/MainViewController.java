@@ -5,11 +5,20 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import kloeverly.persistence.DataManager;
 
 public class MainViewController
 {
+  private DataManager dataManager;
 
-    @FXML private void handleShowAllResidents(Event event) {
+  public void init(DataManager dataManager)
+  {
+    this.dataManager = dataManager;
+  }
+
+
+
+  @FXML private void handleShowAllResidents(Event event) {
     Object source = event.getSource();
 
     if (source instanceof Label) {

@@ -1,8 +1,9 @@
 package kloeverly.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Community
+public class Community implements Serializable
 {
   private String name;
   private int greenPointsBalance;
@@ -69,5 +70,44 @@ public class Community
   public ArrayList<TaskTemplate> getCommunityTaskCatalogue()
   {
     return communityTaskCatalogue;
+  }
+
+  public ArrayList<Task> getTasks()
+  {
+    return tasks;
+  }
+
+  public ArrayList<CommunityTask> getAssignedTasksByResident(Resident resident)
+  {
+    ArrayList<CommunityTask> resultArray = new ArrayList<>();
+
+    for (Task task : tasks)
+    {
+      if (task instanceof CommunityTask && task.getStatus() == TaskStatus.ACTIVE)
+      {
+        if (((CommunityTask) task).getAssignedTo() == resident)
+        {
+          resultArray.add((CommunityTask) task);
+        }
+      }
+    }
+    return resultArray;
+  }
+
+  public ArrayList<ExchangeTask> getOwnedTasksByResident(Resident resident)
+  {
+    ArrayList<ExchangeTask> resultArray = new ArrayList<>();
+
+    for (Task task : tasks)
+    {
+      if (task instanceof ExchangeTask && task.getStatus() == TaskStatus.ACTIVE)
+      {
+        if (((ExchangeTask) task).getOwner() == resident)
+        {
+          resultArray.add((ExchangeTask) task);
+        }
+      }
+    }
+    return resultArray;
   }
 }

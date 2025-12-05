@@ -1,16 +1,17 @@
 package kloeverly.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class CommunityTask extends Task
+public class CommunityTask extends Task implements Serializable
 {
   private int ID;
   private String title;
   private String description;
   private int pointValue;
   private TaskStatus status;
-  private boolean isAnonymous;
   private LocalDate created;
+  private Resident assignedTo;
   private LocalDate completed;
   private Resident completedBy;
 
@@ -29,5 +30,10 @@ public class CommunityTask extends Task
   public void deleteTask()
   {
 
+  }
+
+  public Resident getAssignedTo()
+  {
+    return assignedTo;
   }
 }
