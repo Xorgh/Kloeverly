@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kloeverly.presentation.controllers.MainViewController">
+   <left>
+      <VBox alignment="TOP_CENTER" prefWidth="200.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Kløverly">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Administration">
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Separator prefWidth="200.0">
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding></Separator>
+            <Label onMouseClicked="#handleShowAllResidents" text="Beboere">
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowAllResidents" text="Oversigt" />
+            <Button maxWidth="130.0" mnemonicParsing="false" onAction="#handleAddResident" text="Opret" />
+            <Separator layoutX="15.0" layoutY="239.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Separator>
+            <Label layoutX="67.0" layoutY="265.0" onMouseClicked="#handleAddGreenTask" text="Grønnehandlinger">
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button layoutX="45.0" layoutY="139.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleAddGreenTask" text="Opret" />
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Separator>
+            <Label onMouseClicked="#handleShowAllCommunityTasks" text="Fællesopgaver">
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowAllCommunityTasks" text="Oversigt" />
+            <Button layoutX="45.0" layoutY="275.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleAddCommunityTask" text="Opret Fra Katalog" />
+            <Button layoutX="45.0" layoutY="305.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleAddTaskTemplate" text="Tilføj Til Katalog" />
+            <Button layoutX="45.0" layoutY="421.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowAllUnassignedCommunityTasks" text="Tildel Fællesopgave" />
+            <Button layoutX="45.0" layoutY="421.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowAllAssignedCommunityTasks" text="Afslut Fællesopgave" />
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Separator>
+            <Label onMouseClicked="#handleShowAllExchangeTasks" text="Bytteopgaver">
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button layoutX="45.0" layoutY="199.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowAllExchangeTasks" text="Oversigt" />
+            <Button layoutX="45.0" layoutY="285.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleAddExchangeTask" text="Opret" />
+            <Button layoutX="45.0" layoutY="491.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowAllAssignedExchangeTasks" text="Afslut Bytteopgave" />
+            <Separator layoutX="15.0" layoutY="531.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Separator>
+            <Label layoutX="71.0" layoutY="549.0" onMouseClicked="#handleShowAllEvents" text="Events">
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button layoutX="45.0" layoutY="577.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowAllEvents" text="Oversigt" />
+            <Button layoutX="45.0" layoutY="607.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleAddEvent" text="Opret" />
+            <Button layoutX="45.0" layoutY="637.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleEvent" text="Afslut Event" />
+            <Separator layoutX="15.0" layoutY="677.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Separator>
+            <Label layoutX="90.0" layoutY="695.0" text="Misc">
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button layoutX="45.0" layoutY="723.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleResetAllPoints" text="Nulstil Points" />
+            <Button layoutX="45.0" layoutY="869.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowDashboard" text="Vis Dashboard" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="20.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </left>
+</BorderPane>
