@@ -6,7 +6,7 @@ public class ExchangeTask
 {
   private int ID;
   private String title;
-  private String offeredItem:
+  private String offeredItem;
   private String description;
   private int pointValue;
   private TaskStatus status;
