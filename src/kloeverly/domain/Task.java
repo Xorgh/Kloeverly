@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public abstract class Task implements Serializable
 {
-  private static int lastId = 0;
+  private static int nextId = 1;
   private int ID;
   private String title;
   private String description;
@@ -16,18 +16,25 @@ public abstract class Task implements Serializable
   private Resident completedBy;
   private boolean isAnonymous;
 
-  public static int getLastId()
+  public static int getNextId()
   {
-    return lastId;
+    int oldId = Task.nextId;
+    nextId++;
+    return oldId;
   }
 
-  public static void setLastId()
+  public static void setNextId(int nextId)
   {
-    Task.lastId ++;
+    Task.nextId = nextId;
   }
 
   public TaskStatus getStatus()
   {
     return status;
+  }
+
+  public int getID()
+  {
+    return ID;
   }
 }

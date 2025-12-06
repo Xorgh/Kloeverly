@@ -5,9 +5,10 @@ import javafx.concurrent.Task;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
 public class Resident implements Serializable
 {
-  private static int lastId = 0;
+  private static int nextId = 1;
   private final int ID;
   private String name;
   private int personalPointBalance;
@@ -18,8 +19,8 @@ public class Resident implements Serializable
 
   public Resident(String name)
   {
-    ID = getLastId() + 1;
-    setLastId();
+    ID = Resident.getNextId();
+    setNextId(ID + 1);
     this.name = name;
     personalPointBalance = 0;
     reservedBalance = 0;
@@ -28,14 +29,16 @@ public class Resident implements Serializable
     ownedTasks = new ArrayList<>();
   }
 
-  public static int getLastId()
+  public static int getNextId()
   {
-    return lastId;
+    int oldId = Resident.nextId;
+    nextId++;
+    return oldId;
   }
 
-  private static void setLastId()
+  public static void setNextId(int nextId)
   {
-    Resident.lastId ++;
+    Resident.nextId = nextId;
   }
 
   public int getID()
@@ -63,9 +66,26 @@ public class Resident implements Serializable
     this.personalPointBalance = personalPointBalance;
   }
 
+  public void addToPersonalPointBalance(int amount)
+  {
+    this.personalPointBalance += amount;
+  }
+
   public int getReservedBalance()
   {
     return reservedBalance;
+  }
+
+  public void reserveBalance(int amount)
+  {
+    reservedBalance += amount;
+    personalPointBalance -= amount;
+  }
+
+  public void releaseReservedBalance(int amount)
+  {
+    reservedBalance -= amount;
+    personalPointBalance += amount;
   }
 
   public void setReservedBalance(int reservedBalance)

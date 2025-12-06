@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class CommunityEvent implements Serializable
 {
+  private static int nextId = 1;
+  private final int ID;
   private String title;
   private String description;
   private int unlockThreshold;
@@ -11,10 +13,23 @@ public class CommunityEvent implements Serializable
 
   public CommunityEvent(String title, String description, int unlockThreshold)
   {
+    ID = CommunityEvent.getNextId();
     this.title = title;
     this.description = description;
     this.unlockThreshold = unlockThreshold;
     status = EventStatus.ACTIVE;
+  }
+
+  public static int getNextId()
+  {
+    int oldId = CommunityEvent.nextId;
+    nextId++;
+    return oldId;
+  }
+
+  public static void setNextId(int nextId)
+  {
+    CommunityEvent.nextId = nextId;
   }
 
   public String getTitle()
@@ -55,5 +70,10 @@ public class CommunityEvent implements Serializable
   public void setStatus(EventStatus status)
   {
     this.status = status;
+  }
+
+  public int getID()
+  {
+    return ID;
   }
 }

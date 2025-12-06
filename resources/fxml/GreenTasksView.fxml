@@ -2,10 +2,12 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,9 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1720.0" spacing="10.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kloeverly.presentation.controllers.ResidentsViewController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1720.0" spacing="10.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kloeverly.presentation.controllers.GreenTasksViewController">
    <children>
-      <Label contentDisplay="CENTER" text="Beboer Oversigt">
+      <Label contentDisplay="CENTER" text="Grønnehandlinger">
          <font>
             <Font size="36.0" />
          </font>
@@ -64,26 +66,22 @@
             <Insets top="15.0" />
          </VBox.margin>
          <children>
-            <TableView fx:id="residentsTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="1" GridPane.rowSpan="23">
+            <TableView fx:id="greenTasksTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="1" GridPane.rowSpan="23">
               <columns>
                 <TableColumn fx:id="ID" editable="false" minWidth="50.0" prefWidth="50.0" resizable="false" text="ID" />
-                <TableColumn fx:id="name" editable="false" minWidth="50.0" prefWidth="200.0" text="Name" />
-                  <TableColumn fx:id="personalPointBalance" editable="false" prefWidth="100.0" text="Balance" />
-                  <TableColumn fx:id="reservedBalance" editable="false" prefWidth="110.0" text="Reserved Balance" />
-                  <TableColumn fx:id="pointBoosted" editable="false" prefWidth="100.0" text="Point Boosted" />
+                <TableColumn fx:id="title" editable="false" minWidth="50.0" prefWidth="200.0" text="Title" />
+                  <TableColumn fx:id="description" editable="false" prefWidth="100.0" text="Beskrivelse" />
+                  <TableColumn fx:id="pointValue" editable="false" prefWidth="110.0" text="Points" />
+                  <TableColumn fx:id="completedBy" editable="false" prefWidth="100.0" text="Beboer" />
+                  <TableColumn fx:id="completedDate" editable="false" prefWidth="100.0" text="Dato" />
               </columns>
             </TableView>
-            <Label text="Beboer Oprettelse:" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Label text="Opret grønhandling" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="nameTextField" alignment="CENTER" onKeyReleased="#handleNameKeyReleased" promptText="Navn" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets left="5.0" right="5.0" />
-               </GridPane.margin>
-            </TextField>
-            <Label text="Navn:*" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+            <Label text="Title:*" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                <font>
                   <Font size="14.0" />
                </font>
@@ -91,7 +89,64 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Button fx:id="addNewResidentButton" mnemonicParsing="false" onAction="#handleAddNewResident" text="Opret" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <TextField fx:id="titleTextField" alignment="CENTER" onKeyReleased="#handleTitleKeyReleased" promptText="Title" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label layoutX="10.0" layoutY="127.0" text="Beskrivelse:*" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <TextArea fx:id="descriptionTextArea" onKeyReleased="#handleDescriptionKeyReleased" prefHeight="200.0" prefWidth="200.0" promptText="Kort beskrivelse" GridPane.rowIndex="6" GridPane.rowSpan="2">
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </TextArea>
+            <Label layoutX="10.0" layoutY="197.0" text="Points:*" GridPane.rowIndex="8" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="pointsTextField" alignment="CENTER" layoutX="15.0" layoutY="153.0" onKeyReleased="#handlePointsKeyReleased" promptText="Points" GridPane.rowIndex="9">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label layoutX="10.0" layoutY="302.0" text="Beboer:*" GridPane.rowIndex="10" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <ChoiceBox fx:id="residentChoiceBox" minWidth="225.0" GridPane.rowIndex="11">
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </ChoiceBox>
+            <Button fx:id="addNewGreenTaskButton" mnemonicParsing="false" onAction="#handleAddNewGreenTask" text="Opret" GridPane.halignment="CENTER" GridPane.rowIndex="16" GridPane.valignment="CENTER" />
+            <Label text="Fællespoints" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="greenPointsLabel" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
    </children>

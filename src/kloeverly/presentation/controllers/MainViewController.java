@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import kloeverly.persistence.DataManager;
+import kloeverly.presentation.core.ViewManager;
 
 public class MainViewController
 {
@@ -18,7 +19,7 @@ public class MainViewController
 
 
 
-  @FXML private void handleShowAllResidents(Event event) {
+  @FXML private void handleViewResidents(Event event) {
     Object source = event.getSource();
 
     if (source instanceof Label) {
@@ -26,25 +27,18 @@ public class MainViewController
     } else if (source instanceof Button) {
       System.out.println("Button clicked: Show all residents");
     }
-
-    // Common logic for showing all residents
-//    showResidentsOverview();
+    ViewManager.showView("ResidentsView");
   }
 
-
-  public void handleAddResident(ActionEvent event)
-  {
-  }
-
-  @FXML public void handleAddGreenTask(Event event)
-  {
+  @FXML private void handleViewGreenTasks(Event event) {
     Object source = event.getSource();
 
     if (source instanceof Label) {
-      System.out.println("Label clicked: open add GreenTask View");
+      System.out.println("Label clicked: View Green Tasks");
     } else if (source instanceof Button) {
-      System.out.println("Button clicked: open add GreenTask View");
+      System.out.println("Button clicked: View Green Tasks");
     }
+    ViewManager.showView("GreenTasksView");
   }
 
   @FXML private void handleShowAllCommunityTasks(Event event) {
@@ -55,10 +49,9 @@ public class MainViewController
     } else if (source instanceof Button) {
       System.out.println("Button clicked: Show all Community Tasks");
     }
-
-    // Common logic for showing all residents
-    //    showResidentsOverview();
   }
+
+
 
   public void handleAddCommunityTask(ActionEvent event)
   {

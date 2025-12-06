@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public class ExchangeTask extends Task implements Serializable
 {
-  private int ID;
+  private final int ID;
   private String title;
   private String offeredItem;
   private String description;
@@ -16,29 +16,52 @@ public class ExchangeTask extends Task implements Serializable
   private LocalDate completed;
   private Resident completedBy;
 
-  public ExchangeTask(String title, String description, int pointValue,
-      Resident completedBy)
+  public ExchangeTask(String title, String offeredItem, String description, int pointValue, Resident owner)
   {
-    this.title = title;
-    this.description = description;
-    this.pointValue = pointValue;
-    this.completedBy = completedBy;
+    if (owner.getPersonalPointBalance() < pointValue)
+    {
+      throw new IllegalArgumentException("Owner does not have enough points to create this exchange task.");
+    }
+    else
+    {
+      ID = Task.getNextId();
+      this.title = title;
+      this.offeredItem = offeredItem;
+      this.description = description;
+      this.pointValue = pointValue;
+      this.owner = owner;
+      status = TaskStatus.ACTIVE;
+      created = LocalDate.now();
+      owner.reserveBalance(pointValue);
+    }
   }
 
-  private void reserveBalance() {
+  public void completeTask(Resident executor)
+  {
+    if (status == TaskStatus.ACTIVE && executor.getPersonalPointBalance() >= pointValue)
+    {
+      status = TaskStatus.COMPLETED;
+      completed = LocalDate.now();
+      completedBy = executor;
+      owner.setReservedBalance(owner.getReservedBalance() - pointValue);
+      executor.addToPersonalPointBalance(pointValue);
 
+    }
+    else
+    {
+      throw new IllegalStateException(
+          "Task cannot be completed. Either it is not active or the buyer does not have enough points.");
+    }
   }
 
-  private void releaseBalance() {
-
-  }
-
-  public void completeTask() {
-
-  }
-
-  public void deleteTask() {
-
+  public void cancelTask()
+  {
+    if (status != TaskStatus.ACTIVE)
+    {
+      throw new IllegalStateException("Only active tasks can be cancelled.");
+    }
+    status = TaskStatus.CANCELLED;
+    owner.releaseReservedBalance(pointValue);
   }
 
   public Resident getOwner()
@@ -46,3 +69,4 @@ public class ExchangeTask extends Task implements Serializable
     return owner;
   }
 }
+

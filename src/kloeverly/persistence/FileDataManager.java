@@ -27,15 +27,71 @@ public class FileDataManager implements DataManager
         Object obj = in.readObject();
         if (obj instanceof DataContainer)
         {
-          return (DataContainer) obj;
+          DataContainer dataContainer = (DataContainer) obj;
+          System.out.println("Data loaded successfully.");
+          resetIdCounters(dataContainer);
+          return dataContainer;
         }
       }
-      catch (Exception ignored)
+      catch (Exception e)
       {
-        // Fall through to create new
+        System.out.println(e + "\nFailed to load data, creating new data container.");
       }
     }
     return new DataContainer(communityName);
+  }
+
+  private void resetIdCounters(DataContainer dataContainer)
+  {
+    Community community = dataContainer.getCommunity();
+
+    // Check and set next Resident ID
+    int maxResidentId = 0;
+    for (Resident resident : community.getResidents())
+    {
+      if (resident.getID() > maxResidentId)
+      {
+        maxResidentId = resident.getID();
+      }
+    }
+    Resident.setNextId(maxResidentId + 1);
+    System.out.println("maxResidentId = " + maxResidentId);
+
+    // Check and set next Task ID
+    int maxTaskId = 0;
+    for (Task task : community.getTasks())
+    {
+      if (task.getID() > maxTaskId)
+      {
+        maxTaskId = task.getID();
+      }
+    }
+    Task.setNextId(maxTaskId + 1);
+    System.out.println("maxTaskId = " + maxTaskId);
+
+  // Check and set next TaskTemplate ID
+  int maxTaskTemplateId = 0;
+    for (TaskTemplate taskTemplate : community.getCommunityTaskCatalogue())
+  {
+    if (taskTemplate.getID() > maxTaskTemplateId)
+    {
+      maxTaskTemplateId = taskTemplate.getID();
+    }
+  }
+    TaskTemplate.setNextId(maxTaskTemplateId + 1);
+    System.out.println("maxTaskTemplateId = " + maxTaskTemplateId);
+
+    // Check and set next Event ID
+    int maxEventId = 0;
+    for (CommunityEvent event : community.getEvents())
+    {
+      if (event.getID() > maxEventId)
+      {
+        maxEventId = event.getID();
+      }
+    }
+    CommunityEvent.setNextId(maxEventId + 1);
+    System.out.println("maxEventId = " + maxEventId);
   }
 
   private void save()
@@ -80,6 +136,48 @@ public class FileDataManager implements DataManager
   @Override public List<Task> getAllTasks()
   {
     return new ArrayList<>(container.getCommunity().getTasks());
+  }
+
+  @Override public List<GreenTask> getAllGreenTasks()
+  {
+    ArrayList<GreenTask> resultArray = new ArrayList<>();
+
+    for (Task task : container.getCommunity().getTasks())
+    {
+      if (task instanceof GreenTask)
+      {
+        resultArray.add((GreenTask) task);
+      }
+    }
+    return resultArray;
+  }
+
+  @Override public List<CommunityTask> getAllCommunityTasks()
+  {
+    ArrayList<CommunityTask> resultArray = new ArrayList<>();
+
+    for (Task task : container.getCommunity().getTasks())
+    {
+      if (task instanceof CommunityTask)
+      {
+        resultArray.add((CommunityTask) task);
+      }
+    }
+    return resultArray;
+  }
+
+  @Override public List<ExchangeTask> getAllExchangeTasks()
+  {
+    ArrayList<ExchangeTask> resultArray = new ArrayList<>();
+
+    for (Task task : container.getCommunity().getTasks())
+    {
+      if (task instanceof ExchangeTask)
+      {
+        resultArray.add((ExchangeTask) task);
+      }
+    }
+    return resultArray;
   }
 
   @Override public void addEvent(CommunityEvent event)

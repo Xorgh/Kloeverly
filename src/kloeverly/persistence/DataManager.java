@@ -15,6 +15,9 @@ public interface DataManager
 
   void addTask(Task task);
   List<Task> getAllTasks();
+  List<GreenTask> getAllGreenTasks();
+  List<CommunityTask> getAllCommunityTasks();
+  List<ExchangeTask> getAllExchangeTasks();
 
   void addEvent(CommunityEvent event);
   List<CommunityEvent> getAllEvents();
@@ -24,4 +27,5 @@ public interface DataManager
 
   List<CommunityTask> getAssignedTasksByResident(Resident resident);
   List<ExchangeTask> getOwnedTasksByResident(Resident resident);
+
 }
