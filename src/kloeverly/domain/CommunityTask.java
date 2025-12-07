@@ -51,6 +51,7 @@ public class CommunityTask extends Task implements Serializable
       status = TaskStatus.COMPLETED;
       completed = LocalDate.now();
       completedBy = assignedTo;
+      assignedTo = null;
       completedBy.addToPersonalPointBalance(pointValue);
     }
   }
@@ -62,6 +63,8 @@ public class CommunityTask extends Task implements Serializable
       throw new IllegalStateException("Only active tasks can be cancelled.");
     }
     status = TaskStatus.CANCELLED;
+    assignedTo = null;
+    completed = LocalDate.now();
   }
 
   public Resident getAssignedTo()

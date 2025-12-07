@@ -75,7 +75,18 @@ public class CommunityTasksViewController implements Initializable, AcceptsStrin
     ResidentChoiceBox.setItems(residentData);
     TaskCatalogueChoiceBox.setItems(taskTemplateData);
     TaskTemplateDeleteChoiceBox.setItems(taskTemplateData);
+
+    communityTasksTable.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> updateControls());
+    ResidentChoiceBox.valueProperty().addListener((obs, oldV, newV) -> updateControls());
+    TaskCatalogueChoiceBox.valueProperty().addListener((obs, oldV, newV) -> updateControls());
+    TaskTemplateDeleteChoiceBox.valueProperty().addListener((obs, oldV, newV) -> updateControls());
+    titleTextField.textProperty().addListener((obs, oldV, newV) -> updateControls());
+    descriptionTextArea.textProperty().addListener((obs, oldV, newV) -> updateControls());
+    pointsTextField.textProperty().addListener((obs, oldV, newV) -> updateControls());
+
+    updateControls();
   }
+
 
   public void init(DataManager dataManager)
   {
@@ -83,6 +94,7 @@ public class CommunityTasksViewController implements Initializable, AcceptsStrin
     tableData.setAll(dataManager.getAllCommunityTasks());
     residentData.setAll(dataManager.getAllResidents());
     taskTemplateData.setAll(dataManager.getAllTaskTemplates());
+    updateControls();
   }
 
   @FXML void handleAddTaskFromCatalogue(ActionEvent event)
@@ -140,14 +152,66 @@ public class CommunityTasksViewController implements Initializable, AcceptsStrin
     pointsTextField.clear();
   }
 
+  private CommunityTask getSelectedTask()
+  {
+    CommunityTask taskSelected = communityTasksTable.getSelectionModel().getSelectedItem();
+    if (taskSelected == null) {
+      System.out.println("No task selected.");
+//      Throw error??
+      return null;
+    }
+    return taskSelected;
+  }
+
   @FXML void handleAssignResidentToTask(ActionEvent event)
   {
+    CommunityTask task = getSelectedTask();
+    Resident resident = ResidentChoiceBox.getValue();
 
+    //    Test
+    System.out.println("task = " + task);
+    System.out.println("resident = " + resident);
+
+    if (task == null || resident == null)
+    {
+      System.out.println("Task or Resident is null, cannot assign.");
+      return;
+    }
+    if (task.getStatus() != TaskStatus.ACTIVE)
+    {
+      System.out.println("Task is not active, cannot assign.");
+      return;
+    }
+    task.assignTask(resident);
+    dataManager.save();
+    refreshView();
   }
 
   @FXML void handleCompleteTask(ActionEvent event)
   {
+    CommunityTask task = getSelectedTask();
 
+    //    Test
+    System.out.println("task = " + task);
+
+    if (task == null)
+    {
+      System.out.println("No task selected, cannot complete.");
+      return;
+    }
+    if (task.getStatus() != TaskStatus.ACTIVE)
+    {
+      System.out.println("Task is not active, cannot complete.");
+      return;
+    }
+    if (task.getAssignedTo() == null)
+    {
+      System.out.println("Task has no assigned resident, cannot complete.");
+      return;
+    }
+    task.completeTask();
+    dataManager.save();
+    refreshView();
   }
 
   @Override public void setArgument(String argument)
@@ -157,8 +221,22 @@ public class CommunityTasksViewController implements Initializable, AcceptsStrin
 
   @FXML void handleCancelTask(ActionEvent event)
   {
-
+    CommunityTask task = getSelectedTask();
+    if (task == null)
+    {
+      System.out.println("No task selected, cannot delete.");
+      return;
+    }
+    if (task.getStatus() != TaskStatus.ACTIVE)
+    {
+      System.out.println("Task is not active, cannot delete.");
+      return;
+    }
+    task.cancelTask();
+    dataManager.save();
+    refreshView();
   }
+
 
   @FXML void handleDeleteTaskTemplate(ActionEvent event)
   {
@@ -168,6 +246,9 @@ public class CommunityTasksViewController implements Initializable, AcceptsStrin
       return;
     }
     dataManager.getCommunity().removeTaskTemplate(selectedTemplate);
+    dataManager.save();
+    TaskTemplateDeleteChoiceBox.getSelectionModel().clearSelection();
+    refreshView();
   }
 
   private void refreshView()
@@ -185,5 +266,42 @@ public class CommunityTasksViewController implements Initializable, AcceptsStrin
     ResidentChoiceBox.getSelectionModel().clearSelection();
     TaskCatalogueChoiceBox.getSelectionModel().clearSelection();
     TaskTemplateDeleteChoiceBox.getSelectionModel().clearSelection();
+
+    updateControls();
+  }
+
+
+  private void updateControls()
+  {
+    CommunityTask selectedTask = communityTasksTable.getSelectionModel().getSelectedItem();
+    TaskTemplate catalogueSelected = TaskCatalogueChoiceBox.getValue();
+    TaskTemplate deleteTemplateSelected = TaskTemplateDeleteChoiceBox.getValue();
+    Resident residentSelected = ResidentChoiceBox.getValue();
+
+    boolean taskIsSelected = selectedTask != null;
+    boolean isActive = taskIsSelected && selectedTask.getStatus() == TaskStatus.ACTIVE;
+    boolean hasAssignedResident = taskIsSelected && isActive && selectedTask.getAssignedTo() != null;
+    boolean residentIsSelected = residentSelected != null;
+
+    assignResident.setDisable(!(taskIsSelected && isActive && residentIsSelected));
+
+    boolean canComplete = taskIsSelected && isActive && hasAssignedResident;
+    completeTaskButton.setDisable(!canComplete);
+
+    boolean canCancel = taskIsSelected && isActive;
+    deleteTaskButton.setDisable(!canCancel);
+
+    addTaskButton.setDisable(catalogueSelected == null);
+
+    deleteTaskTemplateButton.setDisable(deleteTemplateSelected == null);
+
+    boolean validPoints = false;
+    try {
+      validPoints = Integer.parseInt(pointsTextField.getText()) > 0;
+    } catch (Exception ignored) {}
+    boolean canAddTemplate = titleTextField.getText() != null && !titleTextField.getText().isEmpty()
+        && descriptionTextArea.getText() != null && !descriptionTextArea.getText().isEmpty()
+        && validPoints;
+    addTaskTemplateButton.setDisable(!canAddTemplate);
   }
 }
