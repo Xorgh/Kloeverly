@@ -67,15 +67,9 @@ public class MainViewController
     {
       System.out.println("Button clicked: Show all Exchange Tasks");
     }
+    ViewManager.showView("ExchangeTasksView");
   }
 
-  public void handleAddExchangeTask(ActionEvent event)
-  {
-  }
-
-  public void handleShowAllAssignedExchangeTasks(ActionEvent event)
-  {
-  }
 
   @FXML public void handleShowAllEvents(Event event) {
     Object source = event.getSource();

@@ -83,8 +83,6 @@
                </font>
             </Label>
             <Button layoutX="45.0" layoutY="199.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowAllExchangeTasks" text="Oversigt" />
-            <Button layoutX="45.0" layoutY="285.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleAddExchangeTask" text="Opret" />
-            <Button layoutX="45.0" layoutY="491.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowAllAssignedExchangeTasks" text="Afslut Bytteopgave" />
             <Separator layoutX="15.0" layoutY="531.0" prefWidth="200.0">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />

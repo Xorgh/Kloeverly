@@ -2,10 +2,7 @@ package kloeverly.presentation.core;
 
 import kloeverly.persistence.DataManager;
 import kloeverly.persistence.FileDataManager;
-import kloeverly.presentation.controllers.CommunityTasksViewController;
-import kloeverly.presentation.controllers.GreenTasksViewController;
-import kloeverly.presentation.controllers.MainViewController;
-import kloeverly.presentation.controllers.ResidentsViewController;
+import kloeverly.presentation.controllers.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,6 +20,7 @@ public class ControllerConfigurator
       case ResidentsViewController ctrl -> ctrl.init(getDataManager());
       case GreenTasksViewController ctrl -> ctrl.init(getDataManager());
       case CommunityTasksViewController ctrl -> ctrl.init(getDataManager());
+      case ExchangeTasksViewController ctrl -> ctrl.init(getDataManager());
       default -> throw new RuntimeException("Controller of type '" + controller.getClass().getSimpleName() + "' not valid.");
     }
   }
