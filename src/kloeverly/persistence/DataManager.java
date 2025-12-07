@@ -28,4 +28,5 @@ public interface DataManager
   List<CommunityTask> getAssignedTasksByResident(Resident resident);
   List<ExchangeTask> getOwnedTasksByResident(Resident resident);
 
+  void save();
 }

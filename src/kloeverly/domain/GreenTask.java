@@ -24,14 +24,60 @@ public class GreenTask extends Task implements Serializable
     status = TaskStatus.ACTIVE;
     created = LocalDate.now();    
     this.completedBy = completedBy;
-    this.completeTask();
   }
 
-  public void completeTask()
+  public void completeTask(Community community)
   {
     status = TaskStatus.COMPLETED;
     completed = LocalDate.now();
-    //need to add points to community total
+    if (community != null)
+    {
+      community.addGreenPoints(pointValue);
+    }
   }
-  
+
+  @Override public int getID()
+  {
+    return ID;
+  }
+
+  public String getTitle()
+  {
+    return title;
+  }
+
+  public String getDescription()
+  {
+    return description;
+  }
+
+  public int getPointValue()
+  {
+    return pointValue;
+  }
+
+  @Override public TaskStatus getStatus()
+  {
+    return status;
+  }
+
+  public LocalDate getCreated()
+  {
+    return created;
+  }
+
+  public LocalDate getCompleted()
+  {
+    return completed;
+  }
+
+  public Resident getCompletedBy()
+  {
+    return completedBy;
+  }
+
+  public Boolean getAnonymous()
+  {
+    return isAnonymous;
+  }
 }

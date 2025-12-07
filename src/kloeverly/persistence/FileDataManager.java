@@ -3,6 +3,10 @@ package kloeverly.persistence;
 import kloeverly.domain.*;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -69,15 +73,15 @@ public class FileDataManager implements DataManager
     Task.setNextId(maxTaskId + 1);
     System.out.println("maxTaskId = " + maxTaskId);
 
-  // Check and set next TaskTemplate ID
-  int maxTaskTemplateId = 0;
+    // Check and set next TaskTemplate ID
+    int maxTaskTemplateId = 0;
     for (TaskTemplate taskTemplate : community.getCommunityTaskCatalogue())
-  {
-    if (taskTemplate.getID() > maxTaskTemplateId)
     {
-      maxTaskTemplateId = taskTemplate.getID();
+      if (taskTemplate.getID() > maxTaskTemplateId)
+      {
+        maxTaskTemplateId = taskTemplate.getID();
+      }
     }
-  }
     TaskTemplate.setNextId(maxTaskTemplateId + 1);
     System.out.println("maxTaskTemplateId = " + maxTaskTemplateId);
 
@@ -94,7 +98,7 @@ public class FileDataManager implements DataManager
     System.out.println("maxEventId = " + maxEventId);
   }
 
-  private void save()
+  @Override public void save()
   {
     try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file)))
     {

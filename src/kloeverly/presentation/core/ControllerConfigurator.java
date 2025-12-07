@@ -2,9 +2,13 @@ package kloeverly.presentation.core;
 
 import kloeverly.persistence.DataManager;
 import kloeverly.persistence.FileDataManager;
+import kloeverly.presentation.controllers.CommunityTasksViewController;
 import kloeverly.presentation.controllers.GreenTasksViewController;
 import kloeverly.presentation.controllers.MainViewController;
 import kloeverly.presentation.controllers.ResidentsViewController;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class ControllerConfigurator
 {
@@ -18,6 +22,7 @@ public class ControllerConfigurator
       case MainViewController ctrl -> ctrl.init(getDataManager());
       case ResidentsViewController ctrl -> ctrl.init(getDataManager());
       case GreenTasksViewController ctrl -> ctrl.init(getDataManager());
+      case CommunityTasksViewController ctrl -> ctrl.init(getDataManager());
       default -> throw new RuntimeException("Controller of type '" + controller.getClass().getSimpleName() + "' not valid.");
     }
   }
@@ -26,8 +31,8 @@ public class ControllerConfigurator
   {
     if (INSTANCE == null)
     {
-      String path = System.getProperty("user.home") + "/kloeverly.dat";
-      INSTANCE = new FileDataManager(path, "kloeverly");
+      Path path = Paths.get(System.getProperty("user.home"), "kloeverly.dat");
+      INSTANCE = new FileDataManager(path.toString(), "kloeverly");
     }
     return INSTANCE;
   }

@@ -5,7 +5,10 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import kloeverly.domain.Resident;
+import kloeverly.domain.TaskTemplate;
 import kloeverly.persistence.DataManager;
+import kloeverly.presentation.core.ControllerConfigurator;
 import kloeverly.presentation.core.ViewManager;
 
 public class MainViewController
@@ -49,24 +52,7 @@ public class MainViewController
     } else if (source instanceof Button) {
       System.out.println("Button clicked: Show all Community Tasks");
     }
-  }
-
-
-
-  public void handleAddCommunityTask(ActionEvent event)
-  {
-  }
-
-  public void handleAddTaskTemplate(ActionEvent event)
-  {
-  }
-
-  public void handleShowAllUnassignedCommunityTasks(ActionEvent event)
-  {
-  }
-
-  public void handleShowAllAssignedCommunityTasks(ActionEvent event)
-  {
+    ViewManager.showView("CommunityTasksView");
   }
 
   @FXML public void handleShowAllExchangeTasks(Event event)
@@ -115,5 +101,20 @@ public class MainViewController
 
   public void handleShowDashboard(ActionEvent event)
   {
+  }
+
+  public void handleAddTestData(ActionEvent event)
+  {
+    if (this.dataManager == null)
+    {
+     this.dataManager = ControllerConfigurator.getDataManager();
+    }
+
+    dataManager.getCommunity().addResident(new Resident("John Doe"));
+    dataManager.getCommunity().addResident(new Resident("Jane Smith"));
+
+    dataManager.getCommunity().addTaskTemplate(new TaskTemplate("Recycle Paper", "Collect and recycle paper waste.", 10));
+    dataManager.getCommunity().addTaskTemplate(new TaskTemplate("Plant a Tree", "Plant a tree in your community.", 20));
+    dataManager.save();
   }
 }

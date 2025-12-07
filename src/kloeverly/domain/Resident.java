@@ -116,7 +116,6 @@ public class Resident implements Serializable
 
   @Override public String toString()
   {
-    return "Resident{" + "ID=" + ID + ", name='" + name + '\'' + ", personalPointBalance=" + personalPointBalance
-        + ", reservedBalance=" + reservedBalance + ", pointBoosted=" + pointBoosted + '}';
+    return "[" + ID + "] " + name;
   }
 }

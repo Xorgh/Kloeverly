@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class TaskTemplate implements Serializable
 {
-  private static int nextId = 0;
+  private static int nextId = 1;
   private final int ID;
   private String title;
   private String description;
@@ -34,4 +34,26 @@ public class TaskTemplate implements Serializable
   {
     return ID;
   }
+
+  public String getTitle()
+  {
+    return title;
+  }
+
+  public String getDescription()
+  {
+    return description;
+  }
+
+  public int getPointsValue()
+  {
+    return pointsValue;
+  }
+
+  @Override public String toString()
+  {
+    return title + " [ID: " + ID + " - Points: "
+        + pointsValue + ']';
+  }
+
 }

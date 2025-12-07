@@ -14,8 +14,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.util.StringConverter;
-import jdk.management.jfr.RecordingInfo;
 import kloeverly.domain.GreenTask;
 import kloeverly.domain.Resident;
 import kloeverly.persistence.DataManager;
@@ -23,7 +21,6 @@ import kloeverly.presentation.core.AcceptsStringArgument;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -66,25 +63,13 @@ public class GreenTasksViewController implements Initializable, AcceptsStringArg
     ID.setCellValueFactory(new PropertyValueFactory<GreenTask, Integer>("ID"));
     title.setCellValueFactory(new PropertyValueFactory<GreenTask, String>("title"));
     description.setCellValueFactory(new PropertyValueFactory<GreenTask, String>("description"));
-    pointValue.setCellValueFactory(new PropertyValueFactory<GreenTask, Integer>("pointValue)"));
+    pointValue.setCellValueFactory(new PropertyValueFactory<GreenTask, Integer>("pointValue"));
     completedBy.setCellValueFactory(new PropertyValueFactory<GreenTask, Resident>("completedBy"));
     completedDate.setCellValueFactory(new PropertyValueFactory<GreenTask, LocalDate>("completed"));
 
     greenTasksTable.setItems(tableData);
 
     residentChoiceBox.setItems(residentData);
-    residentChoiceBox.setConverter(new StringConverter<Resident>()
-    {
-      @Override public String toString(Resident resident)
-      {
-        return resident == null ? "" : resident.getName() + " [" + resident.getID() + "]";
-      }
-
-      @Override public Resident fromString(String string)
-      {
-        return null;
-      }
-    });
   }
 
   public void init(DataManager dataManager)
@@ -92,6 +77,7 @@ public class GreenTasksViewController implements Initializable, AcceptsStringArg
     this.dataManager = dataManager;
     tableData.setAll(dataManager.getAllGreenTasks());
     residentData.setAll(dataManager.getAllResidents());
+    updateGreenPointsLabel();
   }
 
   @FXML void handleTitleKeyReleased(KeyEvent event)
@@ -114,6 +100,37 @@ public class GreenTasksViewController implements Initializable, AcceptsStringArg
     String taskDescription = descriptionTextArea.getText();
     int taskPoints = Integer.parseInt(pointsTextField.getText());
     Resident selectedResident = residentChoiceBox.getValue();
+
+    if (taskTitle == null ||
+        taskTitle.isEmpty() ||
+        taskDescription == null ||
+        taskDescription.isEmpty() ||
+        selectedResident == null)
+    {
+      return;
+    }
+    GreenTask newTask = new GreenTask(taskTitle, taskDescription, taskPoints, selectedResident);
+
+    dataManager.addTask(newTask);
+
+    newTask.completeTask(dataManager.getCommunity());
+
+    dataManager.save();
+
+    tableData.setAll(dataManager.getAllGreenTasks());
+    greenTasksTable.refresh();
+    updateGreenPointsLabel();
+
+    titleTextField.clear();
+    descriptionTextArea.clear();
+    pointsTextField.clear();
+    residentChoiceBox.getSelectionModel().clearSelection();
+  }
+
+  private void updateGreenPointsLabel()
+  {
+    int greenPoints = dataManager.getCommunity().getGreenPointsBalance();
+    greenPointsLabel.setText(Integer.toString(greenPoints));
   }
 
   @Override public void setArgument(String argument)

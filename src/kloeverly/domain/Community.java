@@ -42,6 +42,11 @@ public class Community implements Serializable
     communityTaskCatalogue.add(taskTemplate);
   }
 
+  public void removeTaskTemplate(TaskTemplate taskTemplate)
+  {
+    communityTaskCatalogue.remove(taskTemplate);
+  }
+
   public String getName()
   {
     return name;
@@ -109,5 +114,10 @@ public class Community implements Serializable
       }
     }
     return resultArray;
+  }
+
+  public void addGreenPoints(int pointValue)
+  {
+    greenPointsBalance += pointValue;
   }
 }

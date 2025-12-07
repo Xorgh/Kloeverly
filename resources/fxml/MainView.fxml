@@ -69,10 +69,6 @@
                </font>
             </Label>
             <Button maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowAllCommunityTasks" text="Oversigt" />
-            <Button layoutX="45.0" layoutY="275.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleAddCommunityTask" text="Opret Fra Katalog" />
-            <Button layoutX="45.0" layoutY="305.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleAddTaskTemplate" text="Tilføj Til Katalog" />
-            <Button layoutX="45.0" layoutY="421.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowAllUnassignedCommunityTasks" text="Tildel Fællesopgave" />
-            <Button layoutX="45.0" layoutY="421.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowAllAssignedCommunityTasks" text="Afslut Fællesopgave" />
             <Separator prefWidth="200.0">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
@@ -120,6 +116,20 @@
             </Label>
             <Button layoutX="45.0" layoutY="723.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleResetAllPoints" text="Nulstil Points" />
             <Button layoutX="45.0" layoutY="869.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowDashboard" text="Vis Dashboard" />
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Separator>
+            <Label text="Test">
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button maxWidth="130.0" mnemonicParsing="false" onAction="#handleAddTestData" text="Tilføj Test Data" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="20.0" />
