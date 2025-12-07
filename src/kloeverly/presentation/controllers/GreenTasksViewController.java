@@ -14,6 +14,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.util.StringConverter;
+import jdk.management.jfr.RecordingInfo;
 import kloeverly.domain.GreenTask;
 import kloeverly.domain.Resident;
 import kloeverly.persistence.DataManager;
@@ -58,16 +60,6 @@ public class GreenTasksViewController implements Initializable, AcceptsStringArg
   private final ObservableList<GreenTask> tableData = FXCollections.observableArrayList();
   private final ObservableList<Resident> residentData = FXCollections.observableArrayList();
 
-  public void init(DataManager dataManager)
-  {
-    this.dataManager = dataManager;
-    List<GreenTask> greenTasks = dataManager.getAllGreenTasks();
-    tableData.setAll(greenTasks);
-    if (greenTasksTable != null)
-    {
-      greenTasksTable.setItems(tableData);
-    }
-  }
 
   @Override public void initialize(URL location, ResourceBundle resources)
   {
@@ -80,13 +72,27 @@ public class GreenTasksViewController implements Initializable, AcceptsStringArg
 
     greenTasksTable.setItems(tableData);
 
-    if (dataManager != null)
+    residentChoiceBox.setItems(residentData);
+    residentChoiceBox.setConverter(new StringConverter<Resident>()
     {
-      tableData.setAll(dataManager.getAllGreenTasks());
-      residentData.setAll(dataManager.getAllResidents());
-    }
+      @Override public String toString(Resident resident)
+      {
+        return resident == null ? "" : resident.getName() + " [" + resident.getID() + "]";
+      }
+
+      @Override public Resident fromString(String string)
+      {
+        return null;
+      }
+    });
   }
 
+  public void init(DataManager dataManager)
+  {
+    this.dataManager = dataManager;
+    tableData.setAll(dataManager.getAllGreenTasks());
+    residentData.setAll(dataManager.getAllResidents());
+  }
 
   @FXML void handleTitleKeyReleased(KeyEvent event)
   {
@@ -104,7 +110,10 @@ public class GreenTasksViewController implements Initializable, AcceptsStringArg
 
   @FXML void handleAddNewGreenTask(ActionEvent event)
   {
-
+    String taskTitle = titleTextField.getText();
+    String taskDescription = descriptionTextArea.getText();
+    int taskPoints = Integer.parseInt(pointsTextField.getText());
+    Resident selectedResident = residentChoiceBox.getValue();
   }
 
   @Override public void setArgument(String argument)
