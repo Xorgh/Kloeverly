@@ -140,7 +140,7 @@ public class CommunityEventsViewController implements Initializable, AcceptsStri
 
     int greenPoints = dataManager.getCommunity().getGreenPointsBalance();
 
-    CommunityEvent selectedEvent = communityEventsTable.getSelectionModel().getSelectedItem();
+    CommunityEvent selectedEvent = getSelectedEvent();
 
     boolean eventIsSelected = selectedEvent != null;
     boolean isCancelled = eventIsSelected && selectedEvent.getStatus() == EventStatus.CANCELLED;
@@ -172,11 +172,6 @@ public class CommunityEventsViewController implements Initializable, AcceptsStri
     addNewCommunityEventButton.setDisable(!canAddEvent);
   }
 
-  @Override public void setArgument(String argument)
-  {
-
-  }
-
   public void handleCompleteEvent(ActionEvent event)
   {
     CommunityEvent selectedEvent = getSelectedEvent();
@@ -201,5 +196,10 @@ public class CommunityEventsViewController implements Initializable, AcceptsStri
     selectedEvent.deleteEvent();
     dataManager.save();
     refreshView();
+  }
+
+  @Override public void setArgument(String argument)
+  {
+
   }
 }

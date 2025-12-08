@@ -68,6 +68,10 @@ public class Resident implements Serializable
 
   public void addToPersonalPointBalance(int amount)
   {
+    if (pointBoosted)
+    {
+      amount *= 1.25;
+    }
     this.personalPointBalance += amount;
   }
 
@@ -103,12 +107,13 @@ public class Resident implements Serializable
     this.pointBoosted = pointBoosted;
   }
 
-  public void setResidentStatus(ResidentStatus newStatus)
+  public void setStatus(ResidentStatus newStatus)
   {
     status = newStatus;
   }
 
-  public ResidentStatus getResidentStatus()
+
+  public ResidentStatus getStatus()
   {
     return status;
   }

@@ -29,7 +29,10 @@ public class Community implements Serializable
 
   public void removeResident(Resident resident)
   {
-    resident.setResidentStatus(ResidentStatus.INACTIVE);
+    resident.setStatus(ResidentStatus.INACTIVE);
+    addGreenPoints(resident.getPersonalPointBalance() + resident.getReservedBalance());
+    resident.setPersonalPointBalance(0);
+    resident.setReservedBalance(0);
   }
 
   public void addTask(Task task)
