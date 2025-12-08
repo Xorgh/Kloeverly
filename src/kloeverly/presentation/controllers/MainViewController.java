@@ -88,6 +88,7 @@ public class MainViewController
 
   public void handleShowDashboard(ActionEvent event)
   {
+    ViewManager.showView("DashboardView");
   }
 
   public void handleAddTestData(ActionEvent event)

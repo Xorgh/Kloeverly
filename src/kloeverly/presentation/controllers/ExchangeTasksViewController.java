@@ -82,7 +82,7 @@ public class ExchangeTasksViewController implements Initializable, AcceptsString
   {
     this.dataManager = dataManager;
     tableData.setAll(dataManager.getAllExchangeTasks());
-    residentData.setAll(dataManager.getAllResidents());
+    residentData.setAll(dataManager.getActiveResidents());
     updateControls();
   }
 
@@ -190,7 +190,7 @@ public class ExchangeTasksViewController implements Initializable, AcceptsString
     tableData.setAll(dataManager.getAllExchangeTasks());
     exchangeTasksTable.refresh();
 
-    residentData.setAll(dataManager.getAllResidents());
+    residentData.setAll(dataManager.getActiveResidents());
 
     taskOwnerChoiceBox.setItems(residentData);
     completedByChoiceBox.setItems(residentData);

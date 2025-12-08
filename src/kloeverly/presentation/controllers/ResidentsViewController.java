@@ -78,7 +78,7 @@ public class ResidentsViewController implements Initializable, AcceptsStringArgu
   public void init(DataManager dataManager)
   {
     this.dataManager = dataManager;
-    tableData.setAll(dataManager.getAllResidents());
+    tableData.setAll(dataManager.getActiveResidents());
     if (residentsTable != null)
     {
       residentsTable.setItems(tableData);
@@ -192,8 +192,6 @@ public class ResidentsViewController implements Initializable, AcceptsStringArgu
     Resident residentSelected = residentsTable.getSelectionModel().getSelectedItem();
     if (residentSelected == null)
     {
-      System.out.println("No resident selected.");
-      //      Throw error??
       return null;
     }
     return residentSelected;
@@ -228,6 +226,10 @@ public class ResidentsViewController implements Initializable, AcceptsStringArgu
     }
 
     Resident selectedResident = getSelectedResident();
+
+    boolean canAddNewResident =
+        nameTextField.getText() != null && !nameTextField.getText().isEmpty();
+    addNewResidentButton.setDisable(!canAddNewResident);
 
     boolean residentIsSelected = selectedResident != null;
     boolean isActive = residentIsSelected && selectedResident.getStatus() == ResidentStatus.ACTIVE;

@@ -76,7 +76,7 @@ public class GreenTasksViewController implements Initializable, AcceptsStringArg
   {
     this.dataManager = dataManager;
     tableData.setAll(dataManager.getAllGreenTasks());
-    residentData.setAll(dataManager.getAllResidents());
+    residentData.setAll(dataManager.getActiveResidents());
     updateGreenPointsLabel();
   }
 

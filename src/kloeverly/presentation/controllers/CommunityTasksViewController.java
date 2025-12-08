@@ -92,7 +92,7 @@ public class CommunityTasksViewController implements Initializable, AcceptsStrin
   {
     this.dataManager = dataManager;
     tableData.setAll(dataManager.getAllCommunityTasks());
-    residentData.setAll(dataManager.getAllResidents());
+    residentData.setAll(dataManager.getActiveResidents());
     taskTemplateData.setAll(dataManager.getAllTaskTemplates());
     updateControls();
   }
@@ -256,7 +256,7 @@ public class CommunityTasksViewController implements Initializable, AcceptsStrin
     tableData.setAll(dataManager.getAllCommunityTasks());
     communityTasksTable.refresh();
 
-    residentData.setAll(dataManager.getAllResidents());
+    residentData.setAll(dataManager.getActiveResidents());
     taskTemplateData.setAll(dataManager.getAllTaskTemplates());
 
     ResidentChoiceBox.setItems(residentData);

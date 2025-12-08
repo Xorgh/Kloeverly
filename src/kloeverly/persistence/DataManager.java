@@ -11,6 +11,7 @@ public interface DataManager
 
   void addResident(Resident resident);
   List<Resident> getAllResidents();
+  List<Resident> getActiveResidents();
 
   void addTask(Task task);
   List<Task> getAllTasks();
@@ -24,8 +25,9 @@ public interface DataManager
   void addTaskTemplate(TaskTemplate taskTemplate);
   List<TaskTemplate> getAllTaskTemplates();
 
-  List<CommunityTask> getAssignedTasksByResident(Resident resident);
-  List<ExchangeTask> getOwnedTasksByResident(Resident resident);
-
   void save();
+
+  List<CommunityTask> getAllValidCommunityTasks();
+  List<ExchangeTask> getAllValidExchangeTasks();
+  List<CommunityEvent> getAllValidCommunityEvents();
 }

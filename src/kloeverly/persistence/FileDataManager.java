@@ -110,6 +110,46 @@ public class FileDataManager implements DataManager
     }
   }
 
+  @Override public ArrayList<CommunityTask> getAllValidCommunityTasks()
+  {
+    ArrayList<CommunityTask> activeTasks = new ArrayList<>();
+    for (CommunityTask task : getAllCommunityTasks())
+    {
+      if (task.getStatus() == TaskStatus.ACTIVE)
+      {
+        activeTasks.add(task);
+      }
+    }
+    return activeTasks;
+    }
+
+  @Override public ArrayList<ExchangeTask> getAllValidExchangeTasks()
+  {
+    ArrayList<ExchangeTask> activeTasks = new ArrayList<>();
+    for (ExchangeTask task : getAllExchangeTasks())
+    {
+      if (task.getStatus() == TaskStatus.ACTIVE)
+      {
+        activeTasks.add(task);
+      }
+    }
+    return activeTasks;
+  }
+
+
+  @Override public ArrayList<CommunityEvent> getAllValidCommunityEvents()
+  {
+    ArrayList<CommunityEvent> activeEvents = new ArrayList<>();
+    for (CommunityEvent event : getAllCommunityEvents())
+    {
+      if (event.getStatus() != EventStatus.CANCELLED)
+      {
+        activeEvents.add(event);
+      }
+    }
+    return activeEvents;
+  }
+
   @Override public void addCommunity(Community community)
   {
     throw new IllegalStateException("Community is owned by DataContainer and created at startup.");
@@ -140,6 +180,19 @@ public class FileDataManager implements DataManager
   @Override public List<Task> getAllTasks()
   {
     return new ArrayList<>(container.getCommunity().getTasks());
+  }
+
+  @Override public List<Resident> getActiveResidents()
+  {
+    ArrayList<Resident> activeResidents = new ArrayList<>();
+    for (Resident resident : container.getCommunity().getResidents())
+    {
+      if (resident.getStatus() == ResidentStatus.ACTIVE)
+      {
+        activeResidents.add(resident);
+      }
+    }
+    return activeResidents;
   }
 
   @Override public List<GreenTask> getAllGreenTasks()
@@ -206,13 +259,4 @@ public class FileDataManager implements DataManager
     return new ArrayList<>(container.getCommunity().getCommunityTaskCatalogue());
   }
 
-  @Override public List<CommunityTask> getAssignedTasksByResident(Resident resident)
-  {
-    return new ArrayList<>(container.getCommunity().getAssignedTasksByResident(resident));
-  }
-
-  @Override public List<ExchangeTask> getOwnedTasksByResident(Resident resident)
-  {
-    return new ArrayList<>(container.getCommunity().getOwnedTasksByResident(resident));
-  }
 }

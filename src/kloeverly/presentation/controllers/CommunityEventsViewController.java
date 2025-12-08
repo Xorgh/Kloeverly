@@ -144,11 +144,12 @@ public class CommunityEventsViewController implements Initializable, AcceptsStri
 
     boolean eventIsSelected = selectedEvent != null;
     boolean isCancelled = eventIsSelected && selectedEvent.getStatus() == EventStatus.CANCELLED;
+    boolean isCompleted = eventIsSelected && selectedEvent.getStatus() == EventStatus.COMPLETED;
     boolean unlockThresholdMet = eventIsSelected && !isCancelled && greenPoints >= selectedEvent.getUnlockThreshold();
 
     completeEventButton.setDisable(!unlockThresholdMet);
 
-    boolean canCancel = eventIsSelected && !isCancelled;
+    boolean canCancel = eventIsSelected && !isCancelled && !isCompleted;
     deleteEventButton.setDisable(!canCancel);
 
     String unlockThresholdString = unlockThresholdTextField.getText();
