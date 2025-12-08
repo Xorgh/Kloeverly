@@ -79,14 +79,7 @@ public class MainViewController
     } else if (source instanceof Button) {
       System.out.println("Button clicked: Show all Events");
     }
-  }
-
-  public void handleAddEvent(ActionEvent event)
-  {
-  }
-
-  public void handleEvent(ActionEvent event)
-  {
+    ViewManager.showView("CommunityEventsView");
   }
 
   public void handleResetAllPoints(ActionEvent event)

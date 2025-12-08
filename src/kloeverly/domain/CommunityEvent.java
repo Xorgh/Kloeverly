@@ -83,4 +83,16 @@ public class CommunityEvent implements Serializable
   {
     return completedDate;
   }
+
+  public void completeEvent()
+  {
+    this.status = EventStatus.COMPLETED;
+    this.completedDate = LocalDate.now();
+  }
+
+  public void deleteEvent()
+  {
+    this.status = EventStatus.CANCELLED;
+    this.completedDate = LocalDate.now();
+  }
 }

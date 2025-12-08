@@ -27,6 +27,11 @@ public class Community implements Serializable
     residents.add(resident);
   }
 
+  public void removeResident(Resident resident)
+  {
+    resident.setResidentStatus(ResidentStatus.INACTIVE);
+  }
+
   public void addTask(Task task)
   {
     tasks.add(task);
@@ -119,5 +124,21 @@ public class Community implements Serializable
   public void addGreenPoints(int pointValue)
   {
     greenPointsBalance += pointValue;
+  }
+
+  // Updates the status of active community events based on the current green points balance
+  public void updateEventsStatus()
+  {
+    for (CommunityEvent event : events)
+    {
+      if(event.getStatus() != EventStatus.ACTIVE)
+      {
+        continue;
+      }
+      if (event.getUnlockThreshold() <= greenPointsBalance)
+      {
+        event.setStatus(EventStatus.UNLOCKED);
+      }
+    }
   }
 }

@@ -97,8 +97,6 @@
                </font>
             </Label>
             <Button layoutX="45.0" layoutY="577.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowAllEvents" text="Oversigt" />
-            <Button layoutX="45.0" layoutY="607.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleAddEvent" text="Opret" />
-            <Button layoutX="45.0" layoutY="637.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleEvent" text="Afslut Event" />
             <Separator layoutX="15.0" layoutY="677.0" prefWidth="200.0">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />

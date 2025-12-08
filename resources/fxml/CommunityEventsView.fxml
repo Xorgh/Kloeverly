@@ -72,6 +72,7 @@
                   <TableColumn fx:id="description" editable="false" prefWidth="100.0" text="Beskrivelse" />
                   <TableColumn fx:id="unlockThreshold" editable="false" prefWidth="110.0" text="Milepæl" />
                   <TableColumn fx:id="status" editable="false" prefWidth="100.0" text="Status" />
+                  <TableColumn fx:id="completedDate" editable="false" prefWidth="100.0" text="Afsluttet" />
               </columns>
             </TableView>
             <Label text="Opret event" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
@@ -130,6 +131,18 @@
             <Label fx:id="greenPointsLabel" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="Afslut event" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="completeEventButton" disable="true" mnemonicParsing="false" onAction="#handleCompleteEvent" text="Afslut" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+            <Button fx:id="deleteEventButton" disable="true" mnemonicParsing="false" onAction="#handleDeleteEvent" text="Slet" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
+            <Label text="Slet opgave" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
          </children>

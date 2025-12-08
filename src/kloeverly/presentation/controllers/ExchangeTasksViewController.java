@@ -119,6 +119,7 @@ public class ExchangeTasksViewController implements Initializable, AcceptsString
     String taskTitle = titleTextField.getText();
     String taskDescription = descriptionTextArea.getText();
     int taskPointValue = Integer.parseInt(pointsTextField.getText());
+    boolean isBuying = buyingOrSelling.equals("Køber");
 
     if (buyingOrSelling.equals("Sælger"))
     {
@@ -129,7 +130,7 @@ public class ExchangeTasksViewController implements Initializable, AcceptsString
       taskTitle = "[Køber] - " + taskTitle;
     }
 
-    ExchangeTask newTask = new ExchangeTask(taskTitle, taskDescription, taskPointValue, owner);
+    ExchangeTask newTask = new ExchangeTask(taskTitle, taskDescription, taskPointValue, isBuying, owner);
 
     dataManager.addTask(newTask);
     dataManager.save();

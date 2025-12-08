@@ -14,8 +14,8 @@ public class Resident implements Serializable
   private int personalPointBalance;
   private int reservedBalance;
   private boolean pointBoosted;
-  private ArrayList<Task> assignedTasks;
-  private ArrayList<Task> ownedTasks;
+  private ResidentStatus status;
+
 
   public Resident(String name)
   {
@@ -25,8 +25,8 @@ public class Resident implements Serializable
     personalPointBalance = 0;
     reservedBalance = 0;
     pointBoosted = false;
-    assignedTasks = new ArrayList<>();
-    ownedTasks = new ArrayList<>();
+    status = ResidentStatus.ACTIVE;
+
   }
 
   public static int getNextId()
@@ -103,15 +103,14 @@ public class Resident implements Serializable
     this.pointBoosted = pointBoosted;
   }
 
-  public ArrayList<Task> getAssignedTasks()
+  public void setResidentStatus(ResidentStatus newStatus)
   {
-    return assignedTasks;
+    status = newStatus;
   }
 
-
-  public ArrayList<Task> getOwnedTasks()
+  public ResidentStatus getResidentStatus()
   {
-    return ownedTasks;
+    return status;
   }
 
   @Override public String toString()

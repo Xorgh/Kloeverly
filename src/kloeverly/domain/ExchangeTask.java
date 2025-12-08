@@ -3,23 +3,36 @@ package kloeverly.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class  ExchangeTask extends Task implements Serializable
+public class ExchangeTask extends Task implements Serializable
 {
   private final int ID;
   private String title;
   private String description;
   private int pointValue;
+  private boolean isBuying;
   private TaskStatus status;
   private LocalDate created;
   private Resident owner;
   private LocalDate completed;
   private Resident completedBy;
 
-  public ExchangeTask(String title, String description, int pointValue, Resident owner)
+  public ExchangeTask(String title, String description, int pointValue, boolean isBuying, Resident owner)
   {
-    if (owner.getPersonalPointBalance() < pointValue)
+    if (isBuying)
     {
-      throw new IllegalArgumentException("Owner does not have enough points to create this exchange task.");
+      if (owner.getPersonalPointBalance() < pointValue)
+      {
+        throw new IllegalArgumentException("Buyer does not have enough points to create this exchange task.");
+      }
+      ID = Task.getNextId();
+      this.title = title;
+      this.description = description;
+      this.pointValue = pointValue;
+      this.isBuying = isBuying;
+      this.owner = owner;
+      status = TaskStatus.ACTIVE;
+      created = LocalDate.now();
+      owner.reserveBalance(pointValue);
     }
     else
     {
@@ -27,10 +40,10 @@ public class  ExchangeTask extends Task implements Serializable
       this.title = title;
       this.description = description;
       this.pointValue = pointValue;
+      this.isBuying = isBuying;
       this.owner = owner;
       status = TaskStatus.ACTIVE;
       created = LocalDate.now();
-      owner.reserveBalance(pointValue);
     }
   }
 
@@ -44,16 +57,28 @@ public class  ExchangeTask extends Task implements Serializable
     {
       throw new IllegalStateException("Owner cannot complete their own exchange task.");
     }
-    if (executor.getPersonalPointBalance() < pointValue)
+
+    if (isBuying)
     {
-      throw new IllegalStateException("Executor does not have enough points to complete this exchange task.");
+      status = TaskStatus.COMPLETED;
+      completed = LocalDate.now();
+      completedBy = executor;
+      owner.setReservedBalance(owner.getReservedBalance() - pointValue);
+      executor.addToPersonalPointBalance(pointValue);
     }
-    status = TaskStatus.COMPLETED;
-    completed = LocalDate.now();
-    completedBy = executor;
-    owner.setReservedBalance(owner.getReservedBalance() - pointValue);
-    executor.addToPersonalPointBalance(pointValue);
-    //TODO: Implement BUYING AND SELLING LOGIC HERE
+
+    if (!isBuying)
+    {
+      if (executor.getPersonalPointBalance() < pointValue)
+      {
+        throw new IllegalStateException("Executor does not have enough points to complete this exchange task.");
+      }
+      status = TaskStatus.COMPLETED;
+      completed = LocalDate.now();
+      completedBy = executor;
+      owner.addToPersonalPointBalance(pointValue);
+      executor.addToPersonalPointBalance(-pointValue);
+    }
   }
 
   public void cancelTask()
@@ -62,8 +87,12 @@ public class  ExchangeTask extends Task implements Serializable
     {
       throw new IllegalStateException("Only active tasks can be cancelled.");
     }
+    if (isBuying)
+    {
+      owner.releaseReservedBalance(pointValue);
+    }
     status = TaskStatus.CANCELLED;
-    owner.releaseReservedBalance(pointValue);
+    completed = LocalDate.now();
   }
 
   public Resident getOwner()
