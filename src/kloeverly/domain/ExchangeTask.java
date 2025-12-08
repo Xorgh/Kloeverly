@@ -3,7 +3,7 @@ package kloeverly.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ExchangeTask extends Task implements Serializable
+public class  ExchangeTask extends Task implements Serializable
 {
   private final int ID;
   private String title;

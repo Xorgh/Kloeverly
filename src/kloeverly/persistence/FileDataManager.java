@@ -184,13 +184,13 @@ public class FileDataManager implements DataManager
     return resultArray;
   }
 
-  @Override public void addEvent(CommunityEvent event)
+  @Override public void addCommunityEvent(CommunityEvent event)
   {
-    container.getCommunity().addEvent(event);
+    container.getCommunity().addCommunityEvent(event);
     save();
   }
 
-  @Override public List<CommunityEvent> getAllEvents()
+  @Override public List<CommunityEvent> getAllCommunityEvents()
   {
     return new ArrayList<>(container.getCommunity().getEvents());
   }

@@ -32,7 +32,7 @@ public class Community implements Serializable
     tasks.add(task);
   }
 
-  public void addEvent(CommunityEvent event)
+  public void addCommunityEvent(CommunityEvent event)
   {
     events.add(event);
   }

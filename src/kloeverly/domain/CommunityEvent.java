@@ -1,6 +1,7 @@
 package kloeverly.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class CommunityEvent implements Serializable
 {
@@ -10,6 +11,7 @@ public class CommunityEvent implements Serializable
   private String description;
   private int unlockThreshold;
   private EventStatus status;
+  private LocalDate completedDate;
 
   public CommunityEvent(String title, String description, int unlockThreshold)
   {
@@ -75,5 +77,10 @@ public class CommunityEvent implements Serializable
   public int getID()
   {
     return ID;
+  }
+
+  public LocalDate getCompletedDate()
+  {
+    return completedDate;
   }
 }

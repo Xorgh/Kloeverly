@@ -21,6 +21,7 @@ public class ControllerConfigurator
       case GreenTasksViewController ctrl -> ctrl.init(getDataManager());
       case CommunityTasksViewController ctrl -> ctrl.init(getDataManager());
       case ExchangeTasksViewController ctrl -> ctrl.init(getDataManager());
+      case CommunityEventsViewController ctrl -> ctrl.init(getDataManager());
       default -> throw new RuntimeException("Controller of type '" + controller.getClass().getSimpleName() + "' not valid.");
     }
   }

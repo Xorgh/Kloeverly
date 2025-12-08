@@ -2,7 +2,6 @@ package kloeverly.persistence;
 
 import kloeverly.domain.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface DataManager
@@ -19,8 +18,8 @@ public interface DataManager
   List<CommunityTask> getAllCommunityTasks();
   List<ExchangeTask> getAllExchangeTasks();
 
-  void addEvent(CommunityEvent event);
-  List<CommunityEvent> getAllEvents();
+  void addCommunityEvent(CommunityEvent event);
+  List<CommunityEvent> getAllCommunityEvents();
 
   void addTaskTemplate(TaskTemplate taskTemplate);
   List<TaskTemplate> getAllTaskTemplates();
