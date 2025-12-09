@@ -10,13 +10,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import kloeverly.domain.*;
 import kloeverly.persistence.DataManager;
-import kloeverly.presentation.core.AcceptsStringArgument;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class CommunityEventsViewController implements Initializable, AcceptsStringArgument
+public class CommunityEventsViewController implements Initializable
 {
   private DataManager dataManager;
 
@@ -199,8 +198,4 @@ public class CommunityEventsViewController implements Initializable, AcceptsStri
     refreshView();
   }
 
-  @Override public void setArgument(String argument)
-  {
-
-  }
 }

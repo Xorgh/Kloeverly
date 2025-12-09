@@ -12,7 +12,7 @@
    <left>
       <VBox alignment="TOP_CENTER" prefWidth="200.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Kløverly">
+            <Label fx:id="MainViewTitle1" onMouseReleased="#handleShowDashboard" text="Kløverly">
                <padding>
                   <Insets top="5.0" />
                </padding>
@@ -20,7 +20,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label text="Administration">
+            <Label fx:id="MainViewTitle2" onMouseReleased="#handleShowDashboard" text="Administration">
                <padding>
                   <Insets bottom="5.0" />
                </padding>
@@ -102,7 +102,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </Separator>
-            <Label layoutX="90.0" layoutY="695.0" text="Misc">
+            <Label layoutX="90.0" layoutY="695.0" text="Utils">
                <padding>
                   <Insets bottom="5.0" />
                </padding>
@@ -111,7 +111,7 @@
                </font>
             </Label>
             <Button layoutX="45.0" layoutY="723.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleResetAllPoints" text="Nulstil Points" />
-            <Button layoutX="45.0" layoutY="869.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowDashboard" text="Vis Dashboard" />
+            <Button layoutX="45.0" layoutY="869.0" maxWidth="130.0" mnemonicParsing="false" onAction="#handleShowExternalDashboard" text="Vis Dashboard" />
             <Separator prefWidth="200.0">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />

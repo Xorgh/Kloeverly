@@ -144,4 +144,14 @@ public class Community implements Serializable
       }
     }
   }
+
+  public void resetAllResidentsPoints()
+  {
+    for (Resident resident : residents)
+    {
+      greenPointsBalance += resident.getPersonalPointBalance() + resident.getReservedBalance();
+      resident.setPersonalPointBalance(0);
+      resident.setReservedBalance(0);
+    }
+  }
 }

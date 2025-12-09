@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import kloeverly.domain.*;
 import kloeverly.persistence.DataManager;
 import kloeverly.presentation.core.ControllerConfigurator;
+import kloeverly.presentation.core.DashboardUtil;
 import kloeverly.presentation.core.ViewManager;
 
 public class MainViewController
@@ -18,7 +19,6 @@ public class MainViewController
   {
     this.dataManager = dataManager;
   }
-
 
 
   @FXML private void handleViewResidents(Event event) {
@@ -83,11 +83,19 @@ public class MainViewController
 
   public void handleResetAllPoints(ActionEvent event)
   {
+    dataManager.getCommunity().resetAllResidentsPoints();
+    dataManager.save();
+    ViewManager.reloadCurrentView();
   }
 
-  public void handleShowDashboard(ActionEvent event)
+  public void handleShowDashboard(Event event)
   {
     ViewManager.showView("DashboardView");
+  }
+
+  public void handleShowExternalDashboard(Event event)
+  {
+    DashboardUtil.openDashboardWindow();
   }
 
   public void handleAddTestData(ActionEvent event)
@@ -99,30 +107,34 @@ public class MainViewController
 
     Community community = dataManager.getCommunity();
 
-    Resident jd = new Resident("John Doe");
-    Resident js = new Resident("Jane Smith");
-    community.addResident(jd);
-    community.addResident(js);
+    Resident gb = new Resident("Grønne Bob");
+    Resident dv = new Resident("Don Vegan");
+    community.addResident(gb);
+    community.addResident(dv);
 
-    jd.addToPersonalPointBalance(1000);
-    js.setPointBoosted(true);
-    js.addToPersonalPointBalance(1000);
+    gb.addToPersonalPointBalance(1000);
+    dv.setPointBoosted(true);
+    dv.addToPersonalPointBalance(1000);
 
-    community.addCommunityEvent(new CommunityEvent("Pizza Party", "Celebrate community achievements with a pizza party!", 1500));
+    GreenTask greenTask = new GreenTask( "Affaldssortering", "Jeg sorterede alt mit affald i sidste uge.", 1000, gb);
+    community.addTask(greenTask);
+    greenTask.completeTask(community);
 
-    community.addTaskTemplate(new TaskTemplate("Recycle Paper", "Collect and recycle paper waste.", 100));
-    community.addTaskTemplate(new TaskTemplate("Plant a Tree", "Plant a tree in your community.", 200));
+    community.addCommunityEvent(new CommunityEvent("Pizza Party", "Lad os fejre at have nået vores grønne mål med et pizza party!", 1500));
+
+    community.addTaskTemplate(new TaskTemplate("Madlavning", "Lav mad til fællesspisning", 100));
+    community.addTaskTemplate(new TaskTemplate("Havearbejde", "Slå græs på fællesarealet.", 200));
 
 
     CommunityTask task1 = new CommunityTask(community.getCommunityTaskCatalogue().getFirst());
     CommunityTask task2 = new CommunityTask(community.getCommunityTaskCatalogue().getLast());
     community.addTask(task1);
     community.addTask(task2);
-    task1.assignTask(jd);
-    task2.assignTask(js);
+    task1.assignTask(gb);
+    task2.assignTask(dv);
 
-    community.addTask(new ExchangeTask("Lawn Mowing", "I will mow your lawn.", 150, false, jd));
-    community.addTask(new ExchangeTask("Grocery Shopping", "I need someone to help with my grocery shopping.", 100, true, js));
+    community.addTask(new ExchangeTask("Græsslåning", "Jeg slår dit græs.", 150, false, gb));
+    community.addTask(new ExchangeTask("Dagligvareindkøb", "Jeg har brug for hjælp til at handle ind.", 100, true, dv));
 
     dataManager.save();
     ViewManager.reloadCurrentView();

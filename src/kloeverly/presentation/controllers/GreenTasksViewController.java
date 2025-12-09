@@ -17,14 +17,13 @@ import javafx.scene.input.KeyEvent;
 import kloeverly.domain.GreenTask;
 import kloeverly.domain.Resident;
 import kloeverly.persistence.DataManager;
-import kloeverly.presentation.core.AcceptsStringArgument;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 
-public class GreenTasksViewController implements Initializable, AcceptsStringArgument
+public class GreenTasksViewController implements Initializable
 {
   private DataManager dataManager;
 
@@ -122,10 +121,5 @@ public class GreenTasksViewController implements Initializable, AcceptsStringArg
   {
     int greenPoints = dataManager.getCommunity().getGreenPointsBalance();
     greenPointsLabel.setText(Integer.toString(greenPoints));
-  }
-
-  @Override public void setArgument(String argument)
-  {
-
   }
 }

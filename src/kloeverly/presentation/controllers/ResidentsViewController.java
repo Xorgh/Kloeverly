@@ -10,19 +10,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import kloeverly.domain.CommunityEvent;
 import kloeverly.domain.Resident;
 import kloeverly.domain.ResidentStatus;
 import kloeverly.persistence.DataManager;
-import kloeverly.presentation.core.AcceptsStringArgument;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
-public class ResidentsViewController implements Initializable, AcceptsStringArgument
+public class ResidentsViewController implements Initializable
 {
   ;
   private DataManager dataManager;
@@ -246,10 +242,5 @@ public class ResidentsViewController implements Initializable, AcceptsStringArgu
     boolean canEditBalance =
         residentIsSelected && editBalanceTextField.getText() != null && !editBalanceTextField.getText().isEmpty();
     editBalanceButton.setDisable(!canEditBalance);
-  }
-
-  @Override public void setArgument(String argument)
-  {
-
   }
 }

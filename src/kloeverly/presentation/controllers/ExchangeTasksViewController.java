@@ -10,13 +10,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import kloeverly.domain.*;
 import kloeverly.persistence.DataManager;
-import kloeverly.presentation.core.AcceptsStringArgument;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class ExchangeTasksViewController implements Initializable, AcceptsStringArgument
+public class ExchangeTasksViewController implements Initializable
 {
   private DataManager dataManager;
 
@@ -159,11 +158,6 @@ public class ExchangeTasksViewController implements Initializable, AcceptsString
     task.completeTask(executor);
     dataManager.save();
     refreshView();
-  }
-
-  @Override public void setArgument(String argument)
-  {
-
   }
 
   @FXML void handleCancelTask(ActionEvent event)

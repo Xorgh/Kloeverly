@@ -47,26 +47,6 @@ public class ViewManager
     }
   }
 
-  public static void showView(String viewName, String argument)
-  {
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(ViewManager.class.getResource(fxmlDirectoryPath + viewName + ".fxml"));
-    try
-    {
-      Parent root = loader.load();
-      AcceptsStringArgument controller = loader.getController();
-      ControllerConfigurator.configure(controller);
-      controller.setArgument(argument);
-      mainLayout.setCenter(root);
-    }
-    catch (Exception e)
-    {
-      e.printStackTrace();
-      Alert error = new Alert(Alert.AlertType.ERROR, "Cannot find view: " + viewName);
-      error.show();
-    }
-  }
-
   public static void reloadCurrentView()
   {
     if (currentView != null)

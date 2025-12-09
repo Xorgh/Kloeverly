@@ -1,5 +1,8 @@
 package kloeverly.presentation.controllers;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,18 +12,19 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
 import kloeverly.domain.*;
 import kloeverly.persistence.DataManager;
-import kloeverly.presentation.core.AcceptsStringArgument;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class DashboardViewController implements Initializable, AcceptsStringArgument
+public class DashboardViewController implements Initializable
 {
 
   private DataManager dataManager;
+  private Timeline refreshDashboardTimeline;
 
   @FXML private Label greenPointsLabel;
 
@@ -76,11 +80,22 @@ public class DashboardViewController implements Initializable, AcceptsStringArgu
     communityEventsData.setAll(dataManager.getAllValidCommunityEvents());
     residentsData.setAll(dataManager.getActiveResidents());
     refreshView();
+    startAutoRefresh();
   }
 
-  @Override public void setArgument(String argument)
+  private void startAutoRefresh()
   {
+    refreshDashboardTimeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> refreshView()));
+    refreshDashboardTimeline.setCycleCount(Animation.INDEFINITE);
+    refreshDashboardTimeline.play();
+  }
 
+  public void stopAutoRefresh()
+  {
+    if (refreshDashboardTimeline != null)
+    {
+      refreshDashboardTimeline.stop();
+    }
   }
 
   private void initializeGreenTasksTable()
