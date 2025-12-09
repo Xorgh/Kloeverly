@@ -5,8 +5,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import kloeverly.domain.Resident;
-import kloeverly.domain.TaskTemplate;
+import kloeverly.domain.*;
 import kloeverly.persistence.DataManager;
 import kloeverly.presentation.core.ControllerConfigurator;
 import kloeverly.presentation.core.ViewManager;
@@ -98,11 +97,34 @@ public class MainViewController
      this.dataManager = ControllerConfigurator.getDataManager();
     }
 
-    dataManager.getCommunity().addResident(new Resident("John Doe"));
-    dataManager.getCommunity().addResident(new Resident("Jane Smith"));
+    Community community = dataManager.getCommunity();
 
-    dataManager.getCommunity().addTaskTemplate(new TaskTemplate("Recycle Paper", "Collect and recycle paper waste.", 10));
-    dataManager.getCommunity().addTaskTemplate(new TaskTemplate("Plant a Tree", "Plant a tree in your community.", 20));
+    Resident jd = new Resident("John Doe");
+    Resident js = new Resident("Jane Smith");
+    community.addResident(jd);
+    community.addResident(js);
+
+    jd.addToPersonalPointBalance(1000);
+    js.setPointBoosted(true);
+    js.addToPersonalPointBalance(1000);
+
+    community.addCommunityEvent(new CommunityEvent("Pizza Party", "Celebrate community achievements with a pizza party!", 1500));
+
+    community.addTaskTemplate(new TaskTemplate("Recycle Paper", "Collect and recycle paper waste.", 100));
+    community.addTaskTemplate(new TaskTemplate("Plant a Tree", "Plant a tree in your community.", 200));
+
+
+    CommunityTask task1 = new CommunityTask(community.getCommunityTaskCatalogue().getFirst());
+    CommunityTask task2 = new CommunityTask(community.getCommunityTaskCatalogue().getLast());
+    community.addTask(task1);
+    community.addTask(task2);
+    task1.assignTask(jd);
+    task2.assignTask(js);
+
+    community.addTask(new ExchangeTask("Lawn Mowing", "I will mow your lawn.", 150, false, jd));
+    community.addTask(new ExchangeTask("Grocery Shopping", "I need someone to help with my grocery shopping.", 100, true, js));
+
     dataManager.save();
+    ViewManager.reloadCurrentView();
   }
 }

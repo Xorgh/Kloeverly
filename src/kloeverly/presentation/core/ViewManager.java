@@ -13,6 +13,7 @@ public class ViewManager
 {
   private static BorderPane mainLayout;
   private final static String fxmlDirectoryPath = "/fxml/";
+  private static String currentView = null;
 
   public static void init(Stage primaryStage, String initialView) throws IOException
   {
@@ -30,6 +31,7 @@ public class ViewManager
   {
     try
     {
+      currentView = viewName;
       FXMLLoader loader = new FXMLLoader();
       loader.setLocation(ViewManager.class.getResource(fxmlDirectoryPath + viewName + ".fxml"));
       Parent root = loader.load();
@@ -62,6 +64,14 @@ public class ViewManager
       e.printStackTrace();
       Alert error = new Alert(Alert.AlertType.ERROR, "Cannot find view: " + viewName);
       error.show();
+    }
+  }
+
+  public static void reloadCurrentView()
+  {
+    if (currentView != null)
+    {
+      showView(currentView);
     }
   }
 }

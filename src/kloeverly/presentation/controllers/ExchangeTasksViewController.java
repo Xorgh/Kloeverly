@@ -47,7 +47,7 @@ public class ExchangeTasksViewController implements Initializable, AcceptsString
 
   private final ObservableList<ExchangeTask> tableData = FXCollections.observableArrayList();
   private final ObservableList<Resident> residentData = FXCollections.observableArrayList();
-  private final ObservableList<String> buyingOrSellingData = FXCollections.observableArrayList("Køber", "Sælger");
+  private final ObservableList<String> buyingOrSellingData = FXCollections.observableArrayList("Køb", "Salg");
 
   @Override public void initialize(URL location, ResourceBundle resources)
   {
@@ -119,15 +119,15 @@ public class ExchangeTasksViewController implements Initializable, AcceptsString
     String taskTitle = titleTextField.getText();
     String taskDescription = descriptionTextArea.getText();
     int taskPointValue = Integer.parseInt(pointsTextField.getText());
-    boolean isBuying = buyingOrSelling.equals("Køber");
+    boolean isBuying = buyingOrSelling.equals("Køb");
 
-    if (buyingOrSelling.equals("Sælger"))
+    if (buyingOrSelling.equals("Salg"))
     {
-      taskTitle = "[Sælger] - " + taskTitle;
+      taskTitle = "[Salg] - " + taskTitle;
     }
     else
     {
-      taskTitle = "[Køber] - " + taskTitle;
+      taskTitle = "[Køb] - " + taskTitle;
     }
 
     ExchangeTask newTask = new ExchangeTask(taskTitle, taskDescription, taskPointValue, isBuying, owner);

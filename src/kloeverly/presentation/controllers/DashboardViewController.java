@@ -135,6 +135,7 @@ public class DashboardViewController implements Initializable, AcceptsStringArgu
     if (dataManager == null)
       return;
 
+    updateGreenPointsLabel();
     greenTasksData.setAll(dataManager.getAllGreenTasks());
     greenTasksTable.refresh();
 
@@ -149,5 +150,11 @@ public class DashboardViewController implements Initializable, AcceptsStringArgu
 
     residentsData.setAll(dataManager.getActiveResidents());
     residentsTable.refresh();
+  }
+
+  private void updateGreenPointsLabel()
+  {
+    int greenPoints = dataManager.getCommunity().getGreenPointsBalance();
+    greenPointsLabel.setText(Integer.toString(greenPoints));
   }
 }

@@ -16,7 +16,7 @@ public class RunApp extends Application
     ControllerConfigurator.getDataManager();
 
     ViewManager.init(primaryStage, "MainView");
-    ViewManager.showView("HomeView");
+    ViewManager.showView("DashboardView");
   }
 
   public static void main(String[] args)

@@ -66,10 +66,10 @@
          <children>
             <TableView fx:id="residentsTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.rowSpan="15">
               <columns>
-                <TableColumn fx:id="name" editable="false" minWidth="50.0" prefWidth="160.0" text="Name" />
-                  <TableColumn fx:id="personalPointBalance" editable="false" prefWidth="100.0" text="Balance" />
+                <TableColumn fx:id="name" editable="false" minWidth="50.0" prefWidth="438.0" text="Name" />
+                  <TableColumn fx:id="personalPointBalance" editable="false" prefWidth="85.0" text="Balance" />
                   <TableColumn fx:id="reservedBalance" editable="false" prefWidth="110.0" text="Reserved Balance" />
-                  <TableColumn fx:id="pointBoosted" editable="false" prefWidth="100.0" text="Point Boosted" />
+                  <TableColumn fx:id="pointBoosted" editable="false" prefWidth="78.0" text="Point Boosted" />
                                 </columns>
             </TableView>
             <Label text="Seneste grønnegerninger" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -103,9 +103,9 @@
             <TableView fx:id="greenTasksTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.rowSpan="15">
                <columns>
                   <TableColumn fx:id="greenTasksTitle" editable="false" minWidth="50.0" prefWidth="109.0" text="Title" />
-                  <TableColumn fx:id="greenTasksDescription" editable="false" prefWidth="467.0" text="Beskrivelse" />
-                  <TableColumn fx:id="greenTasksPointValue" editable="false" prefWidth="71.0" text="Points" />
-                  <TableColumn fx:id="greenTasksCompletedDate" editable="false" prefWidth="66.0" text="Dato" />
+                  <TableColumn fx:id="greenTasksDescription" editable="false" prefWidth="412.0" text="Beskrivelse" />
+                  <TableColumn fx:id="greenTasksPointValue" editable="false" prefWidth="75.0" text="Points" />
+                  <TableColumn fx:id="greenTasksCompletedDate" editable="false" prefWidth="115.0" text="Dato" />
                </columns>
             </TableView>
             <Label fx:id="greenPointsLabel" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
@@ -116,19 +116,19 @@
             <TableView fx:id="communityTasksTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="17" GridPane.rowSpan="9">
                <columns>
                   <TableColumn fx:id="communityTasksTitle" editable="false" minWidth="50.0" prefWidth="109.0" text="Title" />
-                  <TableColumn fx:id="communityTasksDescription" editable="false" prefWidth="339.0" text="Beskrivelse" />
+                  <TableColumn fx:id="communityTasksDescription" editable="false" prefWidth="313.0" text="Beskrivelse" />
                   <TableColumn fx:id="communityTasksPointValue" editable="false" prefWidth="60.0" text="Points" />
-                  <TableColumn fx:id="communityTasksCreated" editable="false" prefWidth="73.0" text="Oprettet" />
-                  <TableColumn fx:id="communityTasksAssignedTo" editable="false" minWidth="0.0" prefWidth="132.0" text="Tildelt" />
+                  <TableColumn fx:id="communityTasksCreated" editable="false" prefWidth="105.0" text="Oprettet" />
+                  <TableColumn fx:id="communityTasksAssignedTo" editable="false" minWidth="0.0" prefWidth="126.0" text="Tildelt" />
                </columns>
             </TableView>
             <TableView fx:id="exchangeTasksTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.columnSpan="3" GridPane.rowIndex="17" GridPane.rowSpan="9">
                <columns>
                   <TableColumn fx:id="exchangeTasksTitle" editable="false" minWidth="50.0" prefWidth="109.0" text="Title" />
-                  <TableColumn fx:id="exchangeTasksDescription" editable="false" prefWidth="324.0" text="Beskrivelse" />
-                  <TableColumn fx:id="exchangeTasksPointValue" editable="false" prefWidth="60.0" text="Points" />
-                  <TableColumn fx:id="exchangeTasksCreated" editable="false" prefWidth="73.0" text="Oprettet" />
-                  <TableColumn fx:id="exchangeTasksOwner" editable="false" minWidth="0.0" prefWidth="142.0" text="Opgave Ejer" />
+                  <TableColumn fx:id="exchangeTasksDescription" editable="false" prefWidth="290.0" text="Beskrivelse" />
+                  <TableColumn fx:id="exchangeTasksPointValue" editable="false" prefWidth="64.0" text="Points" />
+                  <TableColumn fx:id="exchangeTasksCreated" editable="false" prefWidth="108.0" text="Oprettet" />
+                  <TableColumn fx:id="exchangeTasksOwner" editable="false" minWidth="0.0" prefWidth="179.0" text="Opgave Ejer" />
                </columns>
             </TableView>
             <Label text="Events" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">

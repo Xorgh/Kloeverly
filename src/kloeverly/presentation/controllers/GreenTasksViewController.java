@@ -29,26 +29,17 @@ public class GreenTasksViewController implements Initializable, AcceptsStringArg
   private DataManager dataManager;
 
   @FXML private TableView<GreenTask> greenTasksTable;
-
   @FXML private TableColumn<GreenTask, Integer> ID;
-
   @FXML private TableColumn<GreenTask, String> title;
-
   @FXML private TableColumn<GreenTask, String> description;
-
   @FXML private TableColumn<GreenTask, Integer> pointValue;
-
   @FXML private TableColumn<GreenTask, Resident> completedBy;
-
   @FXML private TableColumn<GreenTask, LocalDate> completedDate;
 
-  @FXML private Button addNewGreenTaskButton;
-
-  @FXML private TextArea descriptionTextArea;
-
   @FXML private TextField titleTextField;
-
+  @FXML private TextArea descriptionTextArea;
   @FXML private TextField pointsTextField;
+  @FXML private Button addNewGreenTaskButton;
 
   @FXML private ChoiceBox<Resident> residentChoiceBox;
 

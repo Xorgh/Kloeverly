@@ -95,4 +95,9 @@ public class CommunityEvent implements Serializable
     this.status = EventStatus.CANCELLED;
     this.completedDate = LocalDate.now();
   }
+
+  @Override public String toString()
+  {
+    return title + " - [" + unlockThreshold + "]";
+  }
 }
