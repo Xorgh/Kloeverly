@@ -25,7 +25,7 @@ public class ExchangeTask extends Task implements Serializable
         throw new IllegalArgumentException("Buyer does not have enough points to create this exchange task.");
       }
       ID = Task.getNextId();
-      this.title = title;
+      this.title = "[Køb] - " + title;
       this.description = description;
       this.pointValue = pointValue;
       this.isBuying = isBuying;
@@ -37,7 +37,7 @@ public class ExchangeTask extends Task implements Serializable
     else
     {
       ID = Task.getNextId();
-      this.title = title;
+      this.title = "[Salg] - " + title;
       this.description = description;
       this.pointValue = pointValue;
       this.isBuying = isBuying;

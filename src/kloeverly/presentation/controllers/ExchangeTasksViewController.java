@@ -120,15 +120,6 @@ public class ExchangeTasksViewController implements Initializable
     int taskPointValue = Integer.parseInt(pointsTextField.getText());
     boolean isBuying = buyingOrSelling.equals("Køb");
 
-    if (buyingOrSelling.equals("Salg"))
-    {
-      taskTitle = "[Salg] - " + taskTitle;
-    }
-    else
-    {
-      taskTitle = "[Køb] - " + taskTitle;
-    }
-
     ExchangeTask newTask = new ExchangeTask(taskTitle, taskDescription, taskPointValue, isBuying, owner);
 
     dataManager.addTask(newTask);
