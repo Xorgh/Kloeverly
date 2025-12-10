@@ -13,7 +13,6 @@ public class GreenTask extends Task implements Serializable
   private LocalDate created;
   private LocalDate completed;
   private Resident completedBy;
-  private Boolean isAnonymous = true;
 
   public GreenTask(String title, String description, int pointValue, Resident completedBy)
   {
@@ -76,8 +75,4 @@ public class GreenTask extends Task implements Serializable
     return completedBy;
   }
 
-  public Boolean getAnonymous()
-  {
-    return isAnonymous;
-  }
 }

@@ -14,7 +14,6 @@ public abstract class Task implements Serializable
   private LocalDate created;
   private LocalDate completed;
   private Resident completedBy;
-  private boolean isAnonymous;
 
   public static int getNextId()
   {
