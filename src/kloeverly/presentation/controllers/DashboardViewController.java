@@ -90,14 +90,6 @@ public class DashboardViewController implements Initializable
     refreshDashboardTimeline.play();
   }
 
-  public void stopAutoRefresh()
-  {
-    if (refreshDashboardTimeline != null)
-    {
-      refreshDashboardTimeline.stop();
-    }
-  }
-
   private void initializeGreenTasksTable()
   {
     greenTasksTitle.setCellValueFactory(new PropertyValueFactory<GreenTask, String>("title"));
@@ -108,7 +100,7 @@ public class DashboardViewController implements Initializable
     greenTasksTable.setItems(greenTasksData);
   }
 
-  public void initializeCommunityTasksTable()
+  private void initializeCommunityTasksTable()
   {
     communityTasksTitle.setCellValueFactory(new PropertyValueFactory<CommunityTask, String>("title"));
     communityTasksDescription.setCellValueFactory(new PropertyValueFactory<CommunityTask, String>("description"));
@@ -119,7 +111,7 @@ public class DashboardViewController implements Initializable
     communityTasksTable.setItems(communityTasksData);
   }
 
-  public void initializeExchangeTasksTable()
+  private void initializeExchangeTasksTable()
   {
     exchangeTasksTitle.setCellValueFactory(new PropertyValueFactory<ExchangeTask, String>("title"));
     exchangeTasksDescription.setCellValueFactory(new PropertyValueFactory<ExchangeTask, String>("description"));
@@ -130,12 +122,12 @@ public class DashboardViewController implements Initializable
     exchangeTasksTable.setItems(exchangeTasksData);
   }
 
-  public void initializeEventsListView()
+  private void initializeEventsListView()
   {
     eventsListView.setItems(communityEventsData);
   }
 
-  public void initialiseResidentsTable()
+  private void initialiseResidentsTable()
   {
     name.setCellValueFactory(new PropertyValueFactory<Resident, String>("name"));
     personalPointBalance.setCellValueFactory(new PropertyValueFactory<Resident, Integer>("personalPointBalance"));

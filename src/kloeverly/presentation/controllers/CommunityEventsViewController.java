@@ -172,7 +172,7 @@ public class CommunityEventsViewController implements Initializable
     addNewCommunityEventButton.setDisable(!canAddEvent);
   }
 
-  public void handleCompleteEvent(ActionEvent event)
+  @FXML public void handleCompleteEvent(ActionEvent event)
   {
     CommunityEvent selectedEvent = getSelectedEvent();
     if (selectedEvent == null)
@@ -185,7 +185,7 @@ public class CommunityEventsViewController implements Initializable
     refreshView();
   }
 
-  public void handleDeleteEvent(ActionEvent event)
+  @FXML public void handleDeleteEvent(ActionEvent event)
   {
     CommunityEvent selectedEvent = getSelectedEvent();
     if (selectedEvent == null)
